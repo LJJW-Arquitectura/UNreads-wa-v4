@@ -61,7 +61,7 @@ export class AppComponent {
   }
 
   logout(){
-    this.global.authenticatedId = 0;
+    this.global.logout();
     this.username = "Invitado";
   }
 

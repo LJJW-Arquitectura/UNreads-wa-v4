@@ -20,6 +20,7 @@ import { Storage } from '@ionic/storage';
   			this.storage.get('user').then((user) => {
   				if(user == null){
   					this.storage.set('user', {name:"" , id:0 });
+
   				}else{
   					this.authenticatedId = user.id
   					this.user = user.name
@@ -35,6 +36,12 @@ import { Storage } from '@ionic/storage';
   	setUser(user){
   		this.storage.set('user', {name:user.username , id:user.id });
   	}
+
+    logout(){
+      this.storage.set('user', {name:"" , id:0 });
+      this.authenticatedId = 0
+      this.user = ""
+    }
 
   	refresh(){
       this.storage.ready().then(() => {
