@@ -1,0 +1,25 @@
+<ion-header>
+
+	<ion-toolbar>
+		<ion-title>Reseñar</ion-title>
+	</ion-toolbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list>
+		<h1><strong>{{book_title}}</strong></h1>
+		<ion-item>
+			<ion-textarea placeholder="Reseña" [(ngModel)]="review" required></ion-textarea>
+		</ion-item>
+		<ion-item>
+			<div class="ionic3-star-rating">
+				<ion-button fill="clear" *ngFor="let index of [0,1,2,3,4]" id="{{index}}" icon-only (click)="changeRating(index)">
+					<ion-icon slot="icon-only" [ngStyle]="{'color':index < grade ? '#488aff' : '#b5b5b5' }" name="{{index < grade ? 'ios-star' : 'ios-star-outline'}}"></ion-icon>
+				</ion-button>
+			</div>
+		</ion-item>
+		<ion-button full (click)="createReview()">Reseñar</ion-button>
+	</ion-list>
+</ion-content>

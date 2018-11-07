@@ -1,0 +1,25 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-title>Iniciar Sesion</ion-title>
+	</ion-toolbar>
+
+</ion-header>
+
+<ion-content padding center text-center>
+	<ion-title id="login-title">UNreads</ion-title>
+	<ion-list>
+		<ion-item>
+			<ion-input (keyup.enter)="login()" placeholder="Nombre de Usuario" [(ngModel)]="username">
+			</ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-input (keyup.enter)="login()" placeholder="Contraseña" type="password" [(ngModel)]="password">
+			</ion-input>
+		</ion-item>
+	</ion-list>
+	<ion-button full (click)="login()" (keyup.enter)="login()">Iniciar Sesion</ion-button>
+	<ion-item-divider>
+	  <p> No tienes una cuenta? </p>
+	</ion-item-divider>
+	<ion-button full color="light" (click)="goRegister()">Registrate</ion-button>
+</ion-content>

@@ -1,0 +1,33 @@
+
+<ion-header>
+	<ion-toolbar >
+		<ion-title>Mis libros leidos</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content> 
+	<ion-list inset *ngIf= "ready">
+		<ion-card *ngFor="let book of books$ ; trackBy: trackByFn" > 
+			<ion-card-content>
+				<ion-card-title>
+					{{book.title}}
+				</ion-card-title>
+				<p>{{book.plot.slice(0,100)}} <i *ngIf=" book.plot.length > 50" >...</i></p>
+				<ion-row >
+					<ion-col text-left>
+						<ion-button fill="clear" small color="primary"  (click)="createReview($event, book.id, book.title)">
+							<ion-icon name='text'></ion-icon>
+							Reseñar
+						</ion-button>
+					</ion-col>
+					<ion-col text-right>
+						<ion-button fill="clear" small color="primary" (click)="itemTapped($event, book.id)">
+							<ion-icon name='arrow-dropright'></ion-icon>
+							Ver mas 
+						</ion-button>
+					</ion-col>
+				</ion-row>
+			</ion-card-content>
+		</ion-card>
+	</ion-list>	
+</ion-content>  

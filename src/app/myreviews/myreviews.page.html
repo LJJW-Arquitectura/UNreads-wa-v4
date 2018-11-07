@@ -1,0 +1,31 @@
+
+<ion-header>
+	<ion-toolbar >
+		<ion-title>Mis reseñas</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content> 
+	<h1>Reseñas:</h1>
+	<ion-card *ngFor="let review of (reviews$| async) ;let idx = index ">
+		<ion-card-content>
+			<p>
+				<strong>Libro: </strong>{{review.booktitle}}<br>
+				<strong>Reseña: </strong>{{review.review}}
+			</p>
+			<div class="ionic3-star-rating">
+				<ion-button fill="clear" disable="true" *ngFor="let index of [0,1,2,3,4]" id="{{index}}" icon-only (click)="changeRating(index)">
+					<ion-icon slot="icon-only" [ngStyle]="{'color':index < review.grade ? '#488aff' : '#b5b5b5' }" name="{{index < review.grade ? 'ios-star' : 'ios-star-outline'}}"></ion-icon>
+				</ion-button>
+			</div>
+		<ion-row>
+			<ion-col text-right>
+				<ion-button clear small color="primary" (click)="itemTapped($event, review.book_id)">
+					<ion-icon name='arrow-dropright'></ion-icon>
+					Ver mas sobre el libro reseñado
+				</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-card-content>
+</ion-card>
+</ion-content>  

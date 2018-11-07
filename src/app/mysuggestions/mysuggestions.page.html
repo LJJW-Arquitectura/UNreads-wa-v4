@@ -1,0 +1,33 @@
+
+<ion-header>
+	<ion-toolbar >
+		<ion-title>Mis sugerencias</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content> 
+	<h1>Sugerencias:</h1>
+	<ion-card *ngFor="let suggestion of (suggestions$| async) ;let idx = index ">
+		<ion-card-content>	
+			<p>
+				<strong>Libro1: </strong>{{suggestion.booktitle1}}<br>
+				<strong>Libro2: </strong>{{suggestion.booktitle2}}<br>
+				<strong>Razón: </strong>{{suggestion.reason}}
+			</p>
+		<ion-row>
+			<ion-col text-left>
+				<ion-button fill="clear" small color="primary" (click)="itemTapped($event, suggestion.book_id1)">
+					<ion-icon name='arrow-dropright'></ion-icon>
+					Ver mas sobre el libro 1
+				</ion-button>
+			</ion-col>
+			<ion-col text-right>
+				<ion-button fill="clear" small color="primary" (click)="itemTapped($event, suggestion.book_id2)">
+					<ion-icon name='arrow-dropright'></ion-icon>
+					Ver mas sobre el libro 2
+				</ion-button>
+			</ion-col>
+		</ion-row>
+	</ion-card-content>
+</ion-card>
+</ion-content>  

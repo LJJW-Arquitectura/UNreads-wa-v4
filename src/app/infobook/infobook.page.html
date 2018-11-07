@@ -1,0 +1,97 @@
+<ion-header>
+	<ion-toolbar >
+		<ion-title>Informacion</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+	<ion-list inset>
+		<ion-card>
+			<ion-card-header>
+
+				<strong float-start>{{(book$|async)?.title}}</strong>
+				<ion-chip float-end *ngIf="this.globalProvider.authenticatedId != 0 && !readed" (click)="read()">
+					<ion-icon  name="ios-bookmark"></ion-icon>
+					<ion-label >¿Lo has leido?</ion-label>
+				</ion-chip> 
+				<ion-chip float-end *ngIf="this.globalProvider.authenticatedId != 0 && readed" disabled="true">
+					<ion-icon  name="ios-checkmark-circle-outline"></ion-icon>
+					<ion-label >Leido</ion-label>					
+				</ion-chip> 
+			</ion-card-header>
+			<ion-card-content>
+				{{(book$|async)?.plot}}
+			</ion-card-content>
+			<ion-item>
+				<strong>Editorial: </strong> 
+				<ion-badge>{{(book$|async)?.publisher}}</ion-badge><br>
+			</ion-item>
+			<ion-item>
+				<strong>ISBN: </strong> 
+				<ion-badge>{{(book$|async)?.isbn}}</ion-badge><br>
+			</ion-item>
+			<ion-item>
+				<strong>Paginas: </strong> 
+				<ion-badge>{{(book$|async)?.numPages}}</ion-badge><br>
+			</ion-item>
+			<ion-item>
+				<strong>Autores: </strong> 
+				<ion-badge id="tags" *ngFor="let author of (book$|async)?.authors">{{author}}</ion-badge><br>
+			</ion-item>
+			<ion-item>
+				<strong>Generos: </strong>
+				<ion-badge id="tags" *ngFor="let genre of (book$|async)?.genres">{{genre}}</ion-badge><br>
+			</ion-item>
+		</ion-card>
+	</ion-list>	
+
+	<div padding>
+		<ion-segment [(ngModel)]="info">
+			<ion-segment-button value="revi">
+				Reseñas
+			</ion-segment-button>
+			<ion-segment-button value="sugg">
+				Sugerencias
+			</ion-segment-button>
+		</ion-segment>
+	</div>	
+
+	<div [ngSwitch]="info">
+		<span *ngSwitchCase="'revi'">
+			<h1>Reseñas:</h1>
+			<ion-card *ngFor="let review of reviews$;let idx = index ">
+				<ion-card-content>
+					<p>
+						<strong>Usuario: </strong>{{review.username}}<br>
+						<strong>Reseña: </strong>{{review.review}}
+					</p>
+					<div class="ionic3-star-rating">
+						<ion-button fill="clear" disabled="true" *ngFor="let index of [0,1,2,3,4]" id="{{index}}" icon-only (click)="changeRating(index)">
+							<ion-icon slot="icon-only" [ngStyle]="{'color':index < review.grade ? '#488aff' : '#b5b5b5' }" name="{{index < review.grade ? 'ios-star' : 'ios-star-outline'}}"></ion-icon>
+						</ion-button>
+					</div>
+			</ion-card-content>
+		</ion-card>
+	</span>
+	<span *ngSwitchCase="'sugg'">
+	<h1>Sugerencias:</h1>
+	<ion-card *ngFor="let suggestion of suggestions$;trackBy: trackByFn; let idx = index ">
+		<ion-card-content>
+			<p>
+				<strong>Libro sugerido:</strong>{{suggestion.booktitle2}}<br>
+				<strong>Razón: </strong>{{suggestion.reason}}
+			</p>
+			<ion-row >
+				<ion-col text-right>
+					<ion-button fill="clear" size="small" color="primary" (click)="itemTapped($event, suggestion.book_id2)">
+						<ion-icon name='arrow-dropright'></ion-icon>
+						Ver mas sobre el libro sugerido
+					</ion-button>
+				</ion-col>
+			</ion-row>
+		</ion-card-content>
+	</ion-card>
+	</span>
+</div>
+</ion-content>
