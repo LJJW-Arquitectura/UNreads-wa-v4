@@ -9,7 +9,6 @@
 	<ion-list inset>
 		<ion-card>
 			<ion-card-header>
-
 				<strong float-start>{{(book$|async)?.title}}</strong>
 				<ion-chip float-end *ngIf="this.globalProvider.authenticatedId != 0 && !readed" (click)="read()">
 					<ion-icon  name="ios-bookmark"></ion-icon>
