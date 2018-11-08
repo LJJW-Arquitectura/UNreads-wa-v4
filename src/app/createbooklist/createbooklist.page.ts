@@ -28,9 +28,7 @@ export class CreatebooklistPage implements OnInit {
 		globalProvider.refresh()
 		this.myId = globalProvider.authenticatedId 
 		this.user = globalProvider.user 
-		if(this.myId == 0){
-			this.navCtrl.navigateBack('/books');
-		}
+		
 	}
 	setFilteredItems(){
 		this.provider.getAllBooks().subscribe(book => this.Allbooks$ = book);

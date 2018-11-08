@@ -23,10 +23,9 @@
 	</ion-searchbar>
 	<ion-list inset >
 		<ion-card *ngFor="let book of books$;let idx = index ; trackBy: trackByFn" > 
-
 			<ion-card-content>	
 			  <ion-item>			
-				<ion-checkbox (ionChange) = "checkBook(book)"></ion-checkbox>
+				<ion-checkbox (ionChange)= "checkBook(book)"></ion-checkbox>
 				<ion-label>{{book.title}}</ion-label>
 			  </ion-item>
 			</ion-card-content>

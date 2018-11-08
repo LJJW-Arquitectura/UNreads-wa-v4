@@ -1,9 +1,27 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>createsuggestion</ion-title>
-  </ion-toolbar>
+	<ion-toolbar >
+		<ion-title>Crear sugerencia</ion-title>
+	</ion-toolbar>
 </ion-header>
 
-<ion-content padding>
 
+<ion-content padding center text-center>
+	<ion-list>
+      <ion-item>
+          <ion-label>Libro 1</ion-label>
+          <ion-select [(ngModel)]="book1">
+            <ion-select-option *ngFor="let book of Allbooks$" value="{{[book.id,book.title]}}">{{book.title}}</ion-select-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+          <ion-label>Libro 2</ion-label>
+          <ion-select [(ngModel)]="book2">
+            <ion-select-option *ngFor="let book of Allbooks$" value="{{[book.id,book.title]}}">{{book.title}}</ion-select-option>
+          </ion-select>
+      </ion-item>
+      <ion-item>
+			<ion-input placeholder="Razón" [(ngModel)]="reason"></ion-input>
+    </ion-item>
+	</ion-list>
+	<ion-button full (click)="createSuggestion()">Crear</ion-button>
 </ion-content>

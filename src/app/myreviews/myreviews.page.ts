@@ -17,9 +17,8 @@ export class MyreviewsPage implements OnInit {
 	constructor(public navCtrl: NavController, 
 		public globalProvider: GlobalProvider, 
 		public provider: BooksProvider) {
-		this.reviews$ = provider.getUserReviewsByCode(this.globalProvider.authenticatedId);
-		
 		globalProvider.refresh()
+		this.reviews$ = provider.getUserReviewsByCode(this.globalProvider.authenticatedId);
 		this.myId = globalProvider.authenticatedId 
 		this.user = globalProvider.user 
 		if(globalProvider.authenticatedId == 0){

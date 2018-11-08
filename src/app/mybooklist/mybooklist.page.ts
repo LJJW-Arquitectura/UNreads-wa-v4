@@ -17,16 +17,13 @@ export class MybooklistPage implements OnInit {
 	constructor(public navCtrl: NavController, 
 		public provider: BooksProvider,
 		public globalprovider: GlobalProvider) {
-
-
 		globalprovider.refresh()
 		this.myid = globalprovider.authenticatedId 		
 		if(globalprovider.authenticatedId == 0){
 			this.navCtrl.navigateForward('/booklists');
 		}
-		provider.getBooklistByuser(this.myid).subscribe(list => this.Alllist$ = list);
-		provider.getBooklistByuser(this.myid).subscribe(list => this.lists$ = list);
-
+		provider.getBooklistByuser(globalprovider.authenticatedId).subscribe(list => this.Alllist$ = list);
+		provider.getBooklistByuser(globalprovider.authenticatedId).subscribe(list => this.lists$ = list);
 	} 
 
 	setFilteredItems(){
@@ -48,7 +45,7 @@ export class MybooklistPage implements OnInit {
 		}
 	}
 	createBooklist(){
-		this.navCtrl.navigateForward('/createbooklist/');
+		this.navCtrl.navigateForward('/createbooklist');
 	}
 	ngOnInit() {
 	}

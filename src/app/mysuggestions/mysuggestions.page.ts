@@ -18,6 +18,7 @@ export class MysuggestionsPage implements OnInit {
 	constructor(public navCtrl: NavController, 
 		public globalProvider: GlobalProvider, 
 		public provider: BooksProvider) {
+		globalProvider.refresh()
 		this.suggestions$ = provider.getUserSuggestionsByCode(this.globalProvider.authenticatedId);
 		this.myId = globalProvider.authenticatedId 
 		this.user = globalProvider.user 
