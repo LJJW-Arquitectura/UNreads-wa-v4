@@ -43,8 +43,7 @@ import { Storage } from '@ionic/storage';
       this.user = ""
     }
 
-  	refresh(){
-      this.storage.ready().then(() => {
+  	refresh(){      
         this.storage.get('user').then((user) => {
           console.log(user)
           if(user == null){
@@ -55,6 +54,5 @@ import { Storage } from '@ionic/storage';
           }
 
         });
-      });
     }
   }

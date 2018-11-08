@@ -17,17 +17,18 @@ export class MybooklistPage implements OnInit {
 	constructor(public navCtrl: NavController, 
 		public provider: BooksProvider,
 		public globalprovider: GlobalProvider) {
-		globalprovider.refresh()
+		globalprovider.refresh();
 		this.myid = globalprovider.authenticatedId 		
+		
+		provider.getBooklistByuser(globalprovider.authenticatedId).subscribe(list => this.Alllist$ = list);
+		provider.getBooklistByuser(globalprovider.authenticatedId).subscribe(list => this.lists$ = list);
 		if(globalprovider.authenticatedId == 0){
 			this.navCtrl.navigateForward('/booklists');
 		}
-		provider.getBooklistByuser(globalprovider.authenticatedId).subscribe(list => this.Alllist$ = list);
-		provider.getBooklistByuser(globalprovider.authenticatedId).subscribe(list => this.lists$ = list);
 	} 
 
 	setFilteredItems(){
-		this.provider.getBooklistByuser(this.myid).subscribe(list => this.Alllist$ = list);
+		this.provider.getBooklistByuser(this.globalprovider.authenticatedId).subscribe(list => this.Alllist$ = list);
 		this.lists$ = this.Alllist$.filter((item) => item.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
 	}
 
