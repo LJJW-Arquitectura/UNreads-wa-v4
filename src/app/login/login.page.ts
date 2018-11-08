@@ -75,7 +75,7 @@ export class LoginPage implements OnInit {
 
 
 	goRegister(){
-		//this.navCtrl.push(RegisterPage);
+		this.navCtrl.navigateForward('/register');
 	}
 
 	ngOnInit() {
