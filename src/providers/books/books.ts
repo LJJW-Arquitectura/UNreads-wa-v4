@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';  
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { GlobalProvider } from '../global/global';
 
 import { Apollo } from 'apollo-angular';  
 import gql from 'graphql-tag';
@@ -227,7 +228,8 @@ query booklistByNameUser($id: Int!,$name: String!){
 @Injectable()
 export class BooksProvider {
 
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo,
+              public global: GlobalProvider) { }
 
   getAllBooks(): Observable<any> {
     const queryWatcher = this.apollo.watchQuery<any>({
@@ -282,6 +284,11 @@ export class BooksProvider {
       variables:{
         id: User_id
       },
+      context: {
+        headers: {
+          Authorization: "Bearer " + this.global.token
+        }
+      },
       fetchPolicy: 'network-only'
     });
 
@@ -297,6 +304,10 @@ export class BooksProvider {
         user: User,
         user_id: User_id,
         books: Books
+      },context: {
+        headers: {
+          Authorization: "Bearer " + this.global.token
+        }
       }
     })
     .subscribe(response => console.log(response.data),
@@ -309,6 +320,11 @@ export class BooksProvider {
       variables: {
         user_id: User_id,
         book_id: Book
+      },
+      context: {
+        headers: {
+          Authorization: "Bearer " + this.global.token
+        }
       }
     })
     .subscribe(response => console.log(response.data),
@@ -325,6 +341,11 @@ export class BooksProvider {
         grade: grade,
         username: username,
         booktitle: book_title,
+      },
+      context: {
+        headers: {
+          Authorization: "Bearer " + this.global.token
+        }
       }
     })
   }
@@ -355,6 +376,11 @@ export class BooksProvider {
         book_title1: book_title1,
         book_title2: book_title2,
         username: username
+      },
+      context: {
+        headers: {
+          Authorization: "Bearer " + this.global.token
+        }
       }
     })
   }
@@ -364,6 +390,11 @@ export class BooksProvider {
       query: querybooklistsByUser,
       variables: {
         id: userid
+      },
+      context: {
+        headers: {
+          Authorization: "Bearer " + this.global.token
+        }
       },
       fetchPolicy: 'network-only'
     });
@@ -403,6 +434,11 @@ export class BooksProvider {
       variables: {
         id: code
       },
+      context: {
+        headers: {
+          Authorization: "Bearer " + this.global.token
+        }
+      },
       fetchPolicy: 'network-only'
     });
 
@@ -415,6 +451,11 @@ export class BooksProvider {
       query: queryUserSuggestionsByCode,
       variables: {
         id: code
+      },
+      context: {
+        headers: {
+          Authorization: "Bearer " + this.global.token
+        }
       },
       fetchPolicy: 'network-only'
     });

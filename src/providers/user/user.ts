@@ -20,6 +20,7 @@ const queryUserByUsernameAndPassword = gql`
       password
       email
       id
+      token
     }
   }
 `;

@@ -60,6 +60,7 @@ export class LoginPage implements OnInit {
 					console.log("AuthId: "+user.id)
 					this.global.authenticatedId = user.id;
 					this.global.user = user.username;
+					this.global.token = user.token;
 					this.global.setUser(user)
 					this.presentToast();
 					//this.navCtrl.setRoot(AllbooksPage);
